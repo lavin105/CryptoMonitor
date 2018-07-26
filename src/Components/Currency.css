@@ -1,0 +1,11 @@
+#wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    margin-top:5%;
+  }
+  #coin{
+      display:inline-block;
+      padding-left: 30px;
+      padding-right: 30px;
+  }
