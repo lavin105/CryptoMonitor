@@ -9,7 +9,7 @@ import ripp from "../ripp.jpg";
 import aug from "../aug.jpg";
 import mon from "../mon.png";
 import "./Currency.css";
-import { Bar, Pie } from "react-chartjs-2";
+import { Bar, Pie, Radar } from "react-chartjs-2";
 
 class Currency extends Component {
   constructor(props) {
@@ -24,6 +24,32 @@ class Currency extends Component {
       ripple: "",
       monero: "",
       augur: "",
+      radarChart: {
+        type: "radar",
+        data: {
+          labels: [
+            "Bitcoin 700+",
+            "Etherum",
+            "Dash",
+            "LiteCoin",
+            "ZCash",
+            "Ripple",
+            "Monero",
+            "Augur"
+          ],
+          datasets: [
+            {
+              label: "",
+              fill: true,
+              backgroundColor: "",
+              borderColor: "",
+              pointBorderColor: "",
+              pointBackgroundColor: "",
+              data: []
+            }
+          ]
+        }
+      },
       pieChart: {
         type: "pie",
         data: {
@@ -108,6 +134,17 @@ class Currency extends Component {
         this.setState({ bitcoin: bit });
         this.setState({ ethereum: eth });
         this.setState({ dash: dsh });
+        this.setState({radarChart:{data:{
+          datasets:[{
+            label: "2018",
+              fill: true,
+              backgroundColor: "rgba(49, 114, 255, 0.363)",
+              borderColor: "blue",
+              pointBorderColor: "black",
+              pointBackgroundColor: "rgb(247, 255, 177)",
+              data: [700,eth,dsh,lte,zc,rip,mon,aug]
+          }]
+        }}});
         this.setState({
           pieChart: {
             data: {
@@ -134,7 +171,7 @@ class Currency extends Component {
             data: {
               datasets: [
                 {
-                  label: "Price of Cryptocurrency",
+                  label: "Price of Cryptocurrency USD",
                   data: [bit, eth, dsh, lte, zc, rip, mon, aug],
                   backgroundColor: [
                     "rgba(255, 99, 132, 0.2)",
@@ -192,47 +229,76 @@ class Currency extends Component {
               }}
             />
           </div>
+          <div id="chart2"><Radar
+              data={this.state.radarChart.data}
+              width={100}
+              height={50}
+              options={{
+                maintainAspectRatio: false,
+                scale:{
+                ticks: {
+                  beginAtZero:true,
+                  max:700,
+                  stepSize: 100
+                }
+              }
+              }}
+            /></div>
         </div>
-        <div id="coin">
-          <img src={bcoin} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">Bitcoin: ${this.state.bitcoin}</h1>
+        <div id="coin-container">
+          <div id="coin">
+            <div id="stripe1" />
+            <img src={bcoin} className="App-logo" alt="logo" />
+            <span />
+            <h1 className="coin_info">Bitcoin: ${this.state.bitcoin}</h1>
+            <div id="stripe" />
+          </div>
+          <div id="coin">
+            <img src={erium} className="App-logo" alt="logo" />
+            <span />
+            <h1 className="coin_info">Etherum: ${this.state.ethereum}</h1>
+            <div id="stripe" />
+          </div>
+          <div id="coin">
+            <img src={dashh} className="App-logo" alt="logo" />
+            <span />
+            <h1 className="coin_info">Dash: ${this.state.dash}</h1>
+            <div id="stripe" />
+          </div>
+          <div id="coin">
+            <img src={litee} className="App-logo" alt="logo" />
+            <span />
+            <h1 className="coin_info">LiteCoin: ${this.state.litecoin}</h1>
+            <div id="stripe" />
+          </div>
+          <div id="coin">
+            <img src={cash} className="App-logo" alt="logo" />
+            <span />
+            <h1 className="coin_info">ZCash: ${this.state.zcash}</h1>
+            <div id="stripe" />
+          </div>
+          <div id="coin">
+            <img src={ripp} className="App-logo" alt="logo" />
+            <span />
+            <h1 className="coin_info">Ripple: ${this.state.ripple}</h1>
+            <div id="stripe" />
+          </div>
+          <div id="coin">
+            <img src={mon} className="App-logo" alt="logo" />
+            <span />
+            <h1 className="coin_info">Monero: ${this.state.monero}</h1>
+            <div id="stripe" />
+          </div>
+          <div id="coin">
+            <img src={aug} className="App-logo" alt="logo" />
+            <span />
+            <h1 className="coin_info">Augur: ${this.state.augur}</h1>
+            <div id="stripe" />
+          </div>
         </div>
-        <div id="coin">
-          <img src={erium} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">Etherum: ${this.state.ethereum}</h1>
-        </div>
-        <div id="coin">
-          <img src={dashh} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">Dash: ${this.state.dash}</h1>
-        </div>
-        <div id="coin">
-          <img src={litee} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">LiteCoin: ${this.state.litecoin}</h1>
-        </div>
-        <div id="coin">
-          <img src={cash} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">ZCash: ${this.state.zcash}</h1>
-        </div>
-        <div id="coin">
-          <img src={ripp} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">Ripple: ${this.state.ripple}</h1>
-        </div>
-        <div id="coin">
-          <img src={mon} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">Monero: ${this.state.monero}</h1>
-        </div>
-        <div id="coin">
-          <img src={aug} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">Augur: ${this.state.augur}</h1>
-        </div>
+        <h1>
+          <br />
+        </h1>
       </div>
     );
   }
