@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
-import logo from "../logo.svg";
+import bcoin from "../Bitcoin.svg.png";
+import erium from "../ether.png";
+import dashh from "../dashsss.png";
+import litee from "../litee.png";
+import cash from "../zcashh.png";
+import ripp from "../ripp.jpg";
+import aug from "../aug.jpg";
+import mon from "../mon.png";
 import "./Currency.css";
-import { Bar } from "react-chartjs-2";
+import { Bar, Pie } from "react-chartjs-2";
 
 class Currency extends Component {
   constructor(props) {
@@ -17,6 +24,28 @@ class Currency extends Component {
       ripple: "",
       monero: "",
       augur: "",
+      pieChart: {
+        type: "pie",
+        data: {
+          labels: [
+            "Bitcoin",
+            "Etherum",
+            "Dash",
+            "LiteCoin",
+            "ZCash",
+            "Ripple",
+            "Monero",
+            "Augur"
+          ],
+          datasets: [
+            {
+              label: "Price (USD)",
+              backgroundColor: [],
+              data: []
+            }
+          ]
+        }
+      },
       chartData: {
         type: "bar",
         data: {
@@ -32,7 +61,16 @@ class Currency extends Component {
           ],
           datasets: [
             {
-              label: "Price of Cryptocurrency",
+              labels: [
+                "Bitcoin",
+                "Etherum",
+                "Dash",
+                "LiteCoin",
+                "Zcash",
+                "Ripple",
+                "Monero",
+                "Augur"
+              ],
               data: [],
               backgroundColor: [],
               borderColor: [],
@@ -71,6 +109,27 @@ class Currency extends Component {
         this.setState({ ethereum: eth });
         this.setState({ dash: dsh });
         this.setState({
+          pieChart: {
+            data: {
+              datasets: [
+                {
+                  data: [bit, eth, dsh, lte, zc, rip, mon, aug],
+                  backgroundColor: [
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                    "rgba(75, 192, 192, 1)",
+                    "rgba(153, 102, 255, 1)",
+                    "rgba(255, 159, 64, 1)",
+                    "rgba(136, 255, 0, 1)",
+                    "rgba(22, 64, 252, 1)"
+                  ]
+                }
+              ]
+            }
+          }
+        });
+        this.setState({
           chartData: {
             data: {
               datasets: [
@@ -84,8 +143,8 @@ class Currency extends Component {
                     "rgba(75, 192, 192, 0.2)",
                     "rgba(153, 102, 255, 0.2)",
                     "rgba(255, 159, 64, 0.2)",
-                    "rgba(255, 99, 132, 0.2)",
-                    "rgba(255, 99, 132, 0.2)"
+                    "rgba(136, 255, 0, 0.2)",
+                    "rgba(22, 64, 252, 0.2)"
                   ],
                   borderColor: [
                     "rgba(255,99,132,1)",
@@ -94,8 +153,8 @@ class Currency extends Component {
                     "rgba(75, 192, 192, 1)",
                     "rgba(153, 102, 255, 1)",
                     "rgba(255, 159, 64, 1)",
-                    "rgba(255,99,132,1)",
-                    "rgba(255,99,132,1)"
+                    "green",
+                    "blue"
                   ],
                   borderWidth: 1
                 }
@@ -109,52 +168,11 @@ class Currency extends Component {
   update = () =>
     setInterval(() => {
       this.getCurrency();
-    }, 3);
+    }, 1000);
 
   render() {
     return (
       <div id="wrapper">
-        <div id="coin">
-          <img src={logo} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">Bitcoin: ${this.state.bitcoin}</h1>
-        </div>
-        <div id="coin">
-          <img src={logo} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">Etherum: ${this.state.ethereum}</h1>
-        </div>
-        <div id="coin">
-          <img src={logo} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">Dash: ${this.state.dash}</h1>
-        </div>
-        <div id="coin">
-          <img src={logo} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">LiteCoin: ${this.state.litecoin}</h1>
-        </div>
-        <div id="coin">
-          <img src={logo} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">ZCash: ${this.state.zcash}</h1>
-        </div>
-        <div id="coin">
-          <img src={logo} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">Ripple: ${this.state.ripple}</h1>
-        </div>
-        <div id="coin">
-          <img src={logo} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">Monero: ${this.state.monero}</h1>
-        </div>
-        <div id="coin">
-          <img src={logo} className="App-logo" alt="logo" />
-          <span />
-          <h1 className="coin_info">Augur: ${this.state.augur}</h1>
-        </div>
-
         <div id="chart">
           <Bar
             data={this.state.chartData.data}
@@ -164,6 +182,56 @@ class Currency extends Component {
               maintainAspectRatio: false
             }}
           />
+          <div id="chart2">
+            <Pie
+              data={this.state.pieChart.data}
+              width={100}
+              height={50}
+              options={{
+                maintainAspectRatio: false
+              }}
+            />
+          </div>
+        </div>
+        <div id="coin">
+          <img src={bcoin} className="App-logo" alt="logo" />
+          <span />
+          <h1 className="coin_info">Bitcoin: ${this.state.bitcoin}</h1>
+        </div>
+        <div id="coin">
+          <img src={erium} className="App-logo" alt="logo" />
+          <span />
+          <h1 className="coin_info">Etherum: ${this.state.ethereum}</h1>
+        </div>
+        <div id="coin">
+          <img src={dashh} className="App-logo" alt="logo" />
+          <span />
+          <h1 className="coin_info">Dash: ${this.state.dash}</h1>
+        </div>
+        <div id="coin">
+          <img src={litee} className="App-logo" alt="logo" />
+          <span />
+          <h1 className="coin_info">LiteCoin: ${this.state.litecoin}</h1>
+        </div>
+        <div id="coin">
+          <img src={cash} className="App-logo" alt="logo" />
+          <span />
+          <h1 className="coin_info">ZCash: ${this.state.zcash}</h1>
+        </div>
+        <div id="coin">
+          <img src={ripp} className="App-logo" alt="logo" />
+          <span />
+          <h1 className="coin_info">Ripple: ${this.state.ripple}</h1>
+        </div>
+        <div id="coin">
+          <img src={mon} className="App-logo" alt="logo" />
+          <span />
+          <h1 className="coin_info">Monero: ${this.state.monero}</h1>
+        </div>
+        <div id="coin">
+          <img src={aug} className="App-logo" alt="logo" />
+          <span />
+          <h1 className="coin_info">Augur: ${this.state.augur}</h1>
         </div>
       </div>
     );
